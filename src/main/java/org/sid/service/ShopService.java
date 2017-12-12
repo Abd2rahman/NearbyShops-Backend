@@ -6,4 +6,5 @@ import org.sid.entities.Shop;
 
 public interface ShopService {
 	public List<Shop> allShops();
+	public List<Shop> shopByDistance();
 }
