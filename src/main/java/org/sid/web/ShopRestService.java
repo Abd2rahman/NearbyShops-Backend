@@ -25,7 +25,7 @@ public class ShopRestService {
 		return list; 
 	}
 	
-	@RequestMapping(value="/shopsSorted",method=RequestMethod.GET)
+	@RequestMapping(value="/shopsByDistance",method=RequestMethod.GET)
 	public List<Shop> listShopsByDistance(){
 		return shopService.shopByDistance();
 	}
