@@ -1,5 +1,7 @@
 package org.sid.web;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import org.sid.entities.Shop;
@@ -17,8 +19,15 @@ public class ShopRestService {
 	private ShopService shopService;
 	
 	@RequestMapping(value="/shops",method=RequestMethod.GET)
-	public List<Shop> listResponsableEcole(){
-		return shopService.allShops(); 
+	public List<Shop> listShops(){
+		List<Shop> list=shopService.allShops();
+		
+		return list; 
+	}
+	
+	@RequestMapping(value="/shopsByDistance",method=RequestMethod.GET)
+	public List<Shop> listShopsByDistance(){
+		return shopService.shopByDistance();
 	}
 
 }
