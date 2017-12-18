@@ -48,6 +48,7 @@ public class Shop {
 	public void setLocation(Location location) {
 		this.location = location;
 	}
+	
 	public Shop(String picture, String name, String email, String city, Location location) {
 		super();
 		this.picture = picture;

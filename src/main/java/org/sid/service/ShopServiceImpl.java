@@ -1,10 +1,14 @@
 package org.sid.service;
 
+import java.sql.Timestamp;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
 
+import org.sid.dao.DislikedShopRepository;
 import org.sid.dao.ShopRepository;
+import org.sid.entities.DislikedShop;
 import org.sid.entities.Shop;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +20,9 @@ public class ShopServiceImpl implements ShopService {
 	
 	@Autowired
 	private ShopRepository shopRepo;
+	
+	@Autowired
+	private DislikedShopRepository dislikedShopRepo;
 
 	@Override
 	public List<Shop> allShops() {
@@ -25,6 +32,19 @@ public class ShopServiceImpl implements ShopService {
 	@Override
 	public List<Shop> shopByDistance() {
 		List<Shop> list=shopRepo.findAll();
+		
+		Iterator<Shop> it=list.iterator();
+		
+		while(it.hasNext()){
+			Shop currentShop=it.next();
+			if(dislikedShopRepo.findByShopId(currentShop.getId())!=null){
+				it.remove();
+			}
+			
+		}
+		
+		
+		
 		Collections.sort(list, new Comparator<Shop>(){
 
 			@Override
@@ -43,7 +63,28 @@ public class ShopServiceImpl implements ShopService {
 			}
 			
 		});
+		
 		return list;
 	}
+
+	@Override
+	public Shop createDislikedShop(Shop s) {
+		DislikedShop _dislikedShop=new DislikedShop(s.getId(),new Timestamp(System.currentTimeMillis()));
+		
+		DislikedShop _dislikedShopTest=null;
+		_dislikedShopTest=dislikedShopRepo.save(_dislikedShop);
+		
+		if(_dislikedShopTest==null){
+			return null;
+		}
+		else return s;
+		
+	}
+	
+	
+
+	
+
+	
 
 }

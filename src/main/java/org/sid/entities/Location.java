@@ -23,10 +23,16 @@ public class Location {
 		this.type = type;
 		this.coordinates = coordinates;
 	}
+	
+	public Location() {
+		super();
+	}
 	@Override
 	public String toString() {
 		return "Location [type=" + type + ", coordinates=" + coordinates + "]";
 	}
+	
+	
 	
 	
 	
