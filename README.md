@@ -13,7 +13,7 @@ To import the data, you need to extract the zip file then execute the command be
 
 ## How to run
 
-* Clone this repository 
+* Clone the "develop" branch of this repo: ```git clone -b develop https://github.com/Abd2rahman/NearbyShops-Backend.git``` 
 * Make sure you are running the MongoDB service.
 * You can build the project and run the tests by running ```mvnw.cmd clean package```
 * Once successfully built, you can run the service by running: ```mvnw.cmd spring-boot:run```
