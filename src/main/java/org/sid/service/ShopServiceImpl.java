@@ -1,14 +1,17 @@
 package org.sid.service;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
 import org.sid.dao.DislikedShopRepository;
+import org.sid.dao.LikedShopRepository;
 import org.sid.dao.ShopRepository;
 import org.sid.entities.DislikedShop;
+import org.sid.entities.LikedShop;
 import org.sid.entities.Shop;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +26,9 @@ public class ShopServiceImpl implements ShopService {
 	
 	@Autowired
 	private DislikedShopRepository dislikedShopRepo;
+	
+	@Autowired
+	private LikedShopRepository likedShopRepo;
 
 	@Override
 	public List<Shop> allShops() {
@@ -37,7 +43,7 @@ public class ShopServiceImpl implements ShopService {
 		
 		while(it.hasNext()){
 			Shop currentShop=it.next();
-			if(dislikedShopRepo.findByShopId(currentShop.getId())!=null){
+			if(dislikedShopRepo.findByShopId(currentShop.getId())!=null  || likedShopRepo.findByShopId(currentShop.getId())!=null){
 				it.remove();
 			}
 			
@@ -78,6 +84,43 @@ public class ShopServiceImpl implements ShopService {
 			return null;
 		}
 		else return s;
+		
+	}
+
+	@Override
+	public Shop addLikedShop(Shop s) {
+		LikedShop _likedShop=new LikedShop(s.getId());
+		
+		LikedShop _likedShopTest=null;
+		_likedShopTest=likedShopRepo.save(_likedShop);
+		
+		if(_likedShopTest==null){
+			return null;
+		}
+		else return s;
+	}
+
+	@Override
+	public List<Shop> preferredShops() {
+		// TODO Auto-generated method stub
+		List<Shop> list=new ArrayList<Shop>();
+		
+		List<LikedShop> likedShopList=likedShopRepo.findAll();
+		Iterator<LikedShop> it=likedShopList.iterator();
+		
+		while(it.hasNext()){
+			LikedShop currentLikedShop=it.next();
+			Shop sh=shopRepo.findOne(currentLikedShop.getShop());
+			list.add(sh);
+		}
+		
+		return list;
+	}
+
+	@Override
+	public void deleteLikedShop(String id) {
+		LikedShop _likedShop=likedShopRepo.findByShopId(id);
+		likedShopRepo.delete(_likedShop);
 		
 	}
 	
