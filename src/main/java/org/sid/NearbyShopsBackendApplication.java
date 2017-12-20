@@ -9,6 +9,6 @@ public class NearbyShopsBackendApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(NearbyShopsBackendApplication.class, args);
 	}
-
+ 
 }        
      
