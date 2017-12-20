@@ -16,8 +16,5 @@ To import the data, you need to extract the zip file then execute the command be
 * Clone this repository 
 * Make sure you are running the MongoDB service.
 * You can build the project and run the tests by running ```mvnw.cmd clean package```
-* Once successfully built, you can run the service by running:
-```
-        mvnw.cmd spring-boot:run -Drun.arguments="spring.profiles.active=test"
-```
+* Once successfully built, you can run the service by running: ```mvnw.cmd spring-boot:run```
 * The API is available on **port 8091**
