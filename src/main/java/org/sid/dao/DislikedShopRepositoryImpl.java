@@ -12,10 +12,10 @@ public class DislikedShopRepositoryImpl implements DislikedShopRepositoryCustom 
 	private MongoTemplate mt;
 
 	@Override
-	public DislikedShop findByShopId(String id) {
+	public DislikedShop findByShopId(String id,String userId) {
 		// TODO Auto-generated method stub
 		Query query=new Query();
-		query.addCriteria(Criteria.where("shop").is(id));
+		query.addCriteria(Criteria.where("shop").is(id).and("userId").is(userId));
 		return mt.findOne(query, DislikedShop.class);
 	}
 

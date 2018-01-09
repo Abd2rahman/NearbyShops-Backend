@@ -14,6 +14,7 @@ public class DislikedShop {
 	@Id
 	private String id;
 	private String shop;
+	private String userId;
 	
 	@DateTimeFormat(iso=ISO.DATE_TIME)
 	@Indexed(name="expire_after_seconds_index",expireAfterSeconds=60)
@@ -35,6 +36,14 @@ public class DislikedShop {
 		this.shop = shop;
 	}
 
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
 	public Date getDate() {
 		return date;
 	}
@@ -43,9 +52,12 @@ public class DislikedShop {
 		this.date = date;
 	}
 
-	public DislikedShop(String shop, Date date) {
+	
+
+	public DislikedShop(String shop, String userId, Date date) {
 		super();
 		this.shop = shop;
+		this.userId = userId;
 		this.date = date;
 	}
 
@@ -55,8 +67,10 @@ public class DislikedShop {
 
 	@Override
 	public String toString() {
-		return "DislikedShop [id=" + id + ", shop=" + shop + ", date=" + date + "]";
+		return "DislikedShop [id=" + id + ", shop=" + shop + ", userId=" + userId + ", date=" + date + "]";
 	}
+
+	
 	
 	
 	

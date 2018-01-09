@@ -9,6 +9,7 @@ public class LikedShop {
 	@Id
 	private String id;
 	private String shop;
+	private String userId;
 	public String getId() {
 		return id;
 	}
@@ -21,16 +22,23 @@ public class LikedShop {
 	public void setShop(String shop) {
 		this.shop = shop;
 	}
-	public LikedShop(String shop) {
+	public String getUserId() {
+		return userId;
+	}
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+	public LikedShop(String shop, String userId) {
 		super();
 		this.shop = shop;
+		this.userId = userId;
 	}
 	public LikedShop() {
 		super();
 	}
 	@Override
 	public String toString() {
-		return "LikedShop [id=" + id + ", shop=" + shop + "]";
+		return "LikedShop [id=" + id + ", shop=" + shop + ", userId=" + userId + "]";
 	}
 	
 	

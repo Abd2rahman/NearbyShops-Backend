@@ -4,6 +4,6 @@ import org.sid.entities.DislikedShop;
 
 public interface DislikedShopRepositoryCustom {
 	
-	public DislikedShop findByShopId(String id);
+	public DislikedShop findByShopId(String id,String userId);
 
 }
