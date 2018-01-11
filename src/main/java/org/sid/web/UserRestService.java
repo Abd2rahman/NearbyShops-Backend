@@ -30,9 +30,17 @@ public class UserRestService {
 	private UserRepository userRepo;
 
 	@RequestMapping(value = "/sign-up", method = RequestMethod.POST)
-	public void signUp(@RequestBody User user) {
-		user.setPassword(bCryptPasswordEncoder().encode(user.getPassword()));
-		userRepo.save(user);
+	public boolean signUp(@RequestBody User user) {
+		User userTest=null;
+		userTest=userRepo.findByUsername(user.getUsername());
+		if(userTest!=null){
+			return false;
+		}else{
+			user.setPassword(bCryptPasswordEncoder().encode(user.getPassword()));
+			userRepo.save(user);
+			return true;
+		}
+		
 	}
 
 
